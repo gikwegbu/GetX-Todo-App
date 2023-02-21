@@ -47,7 +47,7 @@ class AddDialog extends StatelessWidget {
                             homeCtrl.editCtrl.text,
                           );
                           if(success) {
-                            EasyLoading.showSuccess("Todo Added 📝");
+                            EasyLoading.showSuccess("Todo Added 📝", maskType: EasyLoadingMaskType.black);
                             Get.back();
                             homeCtrl.changeTask(null);
                           } else {

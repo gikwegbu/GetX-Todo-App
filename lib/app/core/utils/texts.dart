@@ -6,6 +6,7 @@ Text labelText(text, {
   double? fontSize,
   TextAlign? textAlign,
   TextOverflow? overflow,
+  TextDecoration? decoration,
 }) {
   return Text(
       text,
@@ -14,6 +15,7 @@ Text labelText(text, {
         fontWeight: fontWeight,
         fontSize: fontSize,
         overflow: overflow,
+        decoration: decoration,
       ),
       textAlign: textAlign,
   );

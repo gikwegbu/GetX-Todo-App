@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:getx/app/core/utils/extensions.dart';
 import 'package:getx/app/core/utils/texts.dart';
 import 'package:getx/app/modules/detail/widgets/doing_list.dart';
+import 'package:getx/app/modules/detail/widgets/done_list.dart';
 import 'package:getx/app/modules/home/controller.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
@@ -128,7 +128,7 @@ class DetailPage extends StatelessWidget {
                       if (homeCtrl.formKey.currentState!.validate()) {
                         var success = homeCtrl.addTodo(homeCtrl.editCtrl.text);
                         if (success) {
-                          EasyLoading.showSuccess("Todo Added");
+                          EasyLoading.showSuccess("Todo Added", maskType: EasyLoadingMaskType.black);
                         } else {
                           EasyLoading.showError("Todo already exists");
                         }
@@ -147,6 +147,7 @@ class DetailPage extends StatelessWidget {
               ),
             ),
             DoingList(),
+            DoneList(),
           ],
         ),
       ),

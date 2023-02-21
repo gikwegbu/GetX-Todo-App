@@ -11,6 +11,7 @@ class HomeController extends GetxController {
 
   final formKey = GlobalKey<FormState>();
   final editCtrl = TextEditingController();
+  final tabIndex = 0.obs;
   final chipIndex = 0.obs;
   final deleting = false.obs;
   final tasks = <Task>[].obs;
@@ -35,6 +36,10 @@ class HomeController extends GetxController {
 
   void changeChipIndex(int val) {
     chipIndex.value = val;
+  }
+
+  void changeTabIndex(int val) {
+    tabIndex.value = val;
   }
 
   void changeTask(Task? select) {
@@ -117,11 +122,56 @@ class HomeController extends GetxController {
 
   void doneTodo(String title) {
     var doingTodo = {"title": title, "done": false};
-    int index = doingTodos.indexWhere((element) => mapEquals<String, dynamic >(doingTodo, element));
+    int index = doingTodos.indexWhere(
+        (element) => mapEquals<String, dynamic>(doingTodo, element));
     doingTodos.removeAt(index);
     var doneTodo = {"title": title, "done": true};
     doneTodos.add(doneTodo);
     doingTodos.refresh();
     doneTodos.refresh();
   }
+
+  void deleteDoneTodo(dynamic doneTodo) {
+    int index = doneTodos
+        .indexWhere((element) => mapEquals<String, dynamic>(doneTodo, element));
+    doneTodos.removeAt(index);
+    doneTodos.refresh();
+  }
+
+  bool isTodosEmpty(Task task) {
+    return task.todos == null || task.todos!.isEmpty;
+  }
+
+  int getDoneTodo(Task task) {
+    var res = 0;
+    for(int i = 0; i < task.todos!.length; i++) {
+      if(task.todos![i]['done'] == true) {
+        res += 1;
+      }
+    }
+    return res;
+  }
+
+  int getTotalTask () {
+    var res = 0;
+    for(int i = 0; i < tasks.length; i++) {
+      if(tasks[i].todos != null) {
+        res += tasks[i].todos!.length;
+      }
+    }
+    return res;
+  }
+
+  int getTotalDoneTasks() {
+    var res = 0;
+    for(int i = 0; i < tasks.length; i++) {
+      for(int j = 0; j < tasks[i].todos!.length; j++) {
+        if(tasks[i].todos![j]['done'] == true) {
+          res += 1;
+        }
+      }
+    }
+    return res;
+  }
+
 }

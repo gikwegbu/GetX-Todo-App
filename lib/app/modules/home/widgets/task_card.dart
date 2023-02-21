@@ -48,8 +48,8 @@ class TaskCard extends StatelessWidget {
                   // TODO Change after finish tod CRUD
                   // totalSteps: 100,
                   // currentStep: 80,
-                  totalSteps: totalTodos == 0 ? 1 : totalTodos,
-                  currentStep: homeCtrl.doneTodos.length,
+                  totalSteps: homeCtrl.isTodosEmpty(task) ? 1 : task.todos!.length,
+                  currentStep: homeCtrl.isTodosEmpty(task) ? 0 : homeCtrl.getDoneTodo(task),
                   roundedEdges: const Radius.circular(20),
                   size: 5,
                   padding: 0,
